@@ -60,7 +60,13 @@ class App extends Component {
   };
 
   renderOpen({ isOpen, closingIn }) {
-    return <div>{isOpen ? 'Open' : 'Closed'}</div>;
+    console.log(closingIn);
+    return (
+      <div>
+        {isOpen ? 'Open' : 'Closed'}{' '}
+        {isOpen && closingIn < 180 && `Closing in ${closingIn} minutes`}
+      </div>
+    );
   }
 
   render() {
@@ -88,7 +94,7 @@ class App extends Component {
               ? canteens[canteen].map((hours, index) => (
                   <div
                     key={`${canteen}day${index}`}
-                    style={{ background: day === index ? '#0fd' : '#fff' }}
+                    style={{ background: day === index ? '#ddd' : '#fff' }}
                   >
                     {hours.length ? formatHours(hours) : 'Closed'}
                   </div>
