@@ -70,19 +70,17 @@ class App extends Component {
 
   renderOpen({ isOpen, closingIn }) {
     if (!isOpen) {
-      return <div>Closed</div>;
+      // return <div>Closed</div>;
     }
     if (closingIn < 60) {
       return <div>{`Closing in ${closingIn} minutes`}</div>;
     }
-    return <div>Open</div>;
+    // return <div>Open</div>;
   }
 
   render() {
     const day = (moment().day() + 6) % 7;
     const { canteens } = this.state;
-
-    console.log(day);
 
     return (
       <div className="App">

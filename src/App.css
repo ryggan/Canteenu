@@ -29,7 +29,7 @@
 .canteen-card {
   display: flex;
   flex-direction: column;
-  padding: 10px 0;
+  padding: 16px 0;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #eee;
 }
@@ -40,12 +40,13 @@
 }
 
 .canteen-status {
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
 }
 
 .canteen-title {
+  margin-top: 2px;
   margin-left: 10px;
 }
 
