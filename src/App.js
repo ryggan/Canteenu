@@ -11,43 +11,6 @@ const formatHours = hours =>
     7
   )}:${hours.substring(7, 9)}`;
 
-const getOpen = hours => {
-  let isOpen;
-  let closingIn = 0;
-
-  if (hours.length) {
-    const now = {
-      hour: parseInt(moment().format('HH'), 10),
-      minute: parseInt(moment().format('mm'), 10)
-    };
-    const opening = {
-      hour: parseInt(hours.substring(0, 2), 10),
-      minute: parseInt(hours.substring(2, 4), 10)
-    };
-    const closing = {
-      hour: parseInt(hours.substring(5, 7), 10),
-      minute: parseInt(hours.substring(7, 9), 10)
-    };
-
-    console.log(now, opening, closing);
-
-    closingIn = Math.floor(
-      (moment()
-        .set('hour', closing.hour)
-        .set('minute', closing.minute)
-        .unix() -
-        moment().unix()) /
-        60
-    );
-
-    isOpen = closingIn > 0;
-  } else {
-    isOpen = false;
-  }
-
-  return { isOpen, closingIn };
-};
-
 const days = [
   'Monday',
   'Tuesday',
@@ -61,11 +24,53 @@ const days = [
 class App extends Component {
   state = {
     canteens: {},
-    open: -1
+    open: -1,
+    now: moment().unix()
   };
 
   componentDidMount() {
     this.setState({ canteens });
+
+    setInterval(() => {
+      this.setState({ now: moment().unix() });
+    }, 20000);
+  }
+
+  getOpen(hours) {
+    let isOpen;
+    let closingIn = 0;
+
+    if (hours.length) {
+      const now = {
+        hour: parseInt(moment().format('HH'), 10),
+        minute: parseInt(moment().format('mm'), 10)
+      };
+      const opening = {
+        hour: parseInt(hours.substring(0, 2), 10),
+        minute: parseInt(hours.substring(2, 4), 10)
+      };
+      const closing = {
+        hour: parseInt(hours.substring(5, 7), 10),
+        minute: parseInt(hours.substring(7, 9), 10)
+      };
+
+      console.log(now, opening, closing);
+
+      closingIn = Math.floor(
+        (moment()
+          .set('hour', closing.hour)
+          .set('minute', closing.minute)
+          .unix() -
+          this.state.now) /
+          60
+      );
+
+      isOpen = closingIn > 0;
+    } else {
+      isOpen = false;
+    }
+
+    return { isOpen, closingIn };
   }
 
   renderOpen({ isOpen, closingIn }) {
@@ -102,8 +107,8 @@ class App extends Component {
                   <div
                     className="canteen-status"
                     style={{
-                      background: getOpen(canteens[canteen][day]).isOpen
-                        ? getOpen(canteens[canteen][day]).closingIn < 60
+                      background: this.getOpen(canteens[canteen][day]).isOpen
+                        ? this.getOpen(canteens[canteen][day]).closingIn < 60
                           ? '#dd2'
                           : '#2d2'
                         : '#d22'
@@ -114,7 +119,7 @@ class App extends Component {
                   </div>
                 </div>
                 {this.state.open !== index &&
-                  this.renderOpen(getOpen(canteens[canteen][day]))}
+                  this.renderOpen(this.getOpen(canteens[canteen][day]))}
                 {this.state.open === index && (
                   <div>
                     {canteens[canteen].map((hours, index) => (
