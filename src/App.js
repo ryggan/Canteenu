@@ -61,7 +61,7 @@ const days = [
 class App extends Component {
   state = {
     canteens: {},
-    open: 2
+    open: -1
   };
 
   componentDidMount() {
