@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .App {
   text-align: center;
 }
@@ -7,7 +12,7 @@
   background-size: cover;
   background-position: center;
   background-color: #222;
-  height: 100px;
+  height: 80px;
   line-height: 80px;
   padding: 10px;
   margin: 0px;
@@ -18,8 +23,44 @@
   font-size: 1.5em;
 }
 
+.list {
+}
+
 .canteen-card {
-  background: #eee;
-  padding: 5px;
-  border-top: 2px solid #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #eee;
+}
+
+.canteen-header {
+  display: flex;
+  margin: 5px;
+}
+
+.canteen-status {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+}
+
+.canteen-title {
+  margin-left: 10px;
+}
+
+.weekday {
+  flex: 1;
+  text-align: right;
+  margin: 3px;
+}
+
+.hours {
+  flex: 1;
+  text-align: left;
+  margin: 3px;
+}
+
+bold {
+  font-weight: bold;
 }

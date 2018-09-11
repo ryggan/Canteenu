@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 
-import logo from './logo.svg';
 import './App.css';
 
 import canteens from './canteens.json';
@@ -18,8 +17,8 @@ const getOpen = hours => {
 
   if (hours.length) {
     const now = {
-      hour: parseInt(moment().format('HH')),
-      minute: parseInt(moment().format('mm'))
+      hour: parseInt(moment().format('HH'), 10),
+      minute: parseInt(moment().format('mm'), 10)
     };
     const opening = {
       hour: parseInt(hours.substring(0, 2), 10),
@@ -32,13 +31,6 @@ const getOpen = hours => {
 
     console.log(now, opening, closing);
 
-    isOpen =
-      now.hour > opening.hour ||
-      (now.hour === opening.hour &&
-        now.minute >= opening.minute &&
-        now.hour < closing.hour) ||
-      (now.hour === closing.hour && now.minute < closing.minute);
-
     closingIn = Math.floor(
       (moment()
         .set('hour', closing.hour)
@@ -47,6 +39,8 @@ const getOpen = hours => {
         moment().unix()) /
         60
     );
+
+    isOpen = closingIn > 0;
   } else {
     isOpen = false;
   }
@@ -54,23 +48,39 @@ const getOpen = hours => {
   return { isOpen, closingIn };
 };
 
+const days = [
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  'Sunday'
+];
+
 class App extends Component {
   state = {
-    open: -1
+    canteens: {},
+    open: 2
   };
 
+  componentDidMount() {
+    this.setState({ canteens });
+  }
+
   renderOpen({ isOpen, closingIn }) {
-    console.log(closingIn);
-    return (
-      <div>
-        {isOpen ? 'Open' : 'Closed'}{' '}
-        {isOpen && closingIn < 180 && `Closing in ${closingIn} minutes`}
-      </div>
-    );
+    if (!isOpen) {
+      return <div>Closed</div>;
+    }
+    if (closingIn < 60) {
+      return <div>{`Closing in ${closingIn} minutes`}</div>;
+    }
+    return <div>Open</div>;
   }
 
   render() {
     const day = (moment().day() + 6) % 7;
+    const { canteens } = this.state;
 
     console.log(day);
 
@@ -81,27 +91,68 @@ class App extends Component {
             &gt; cantee.nu
           </h1>
         </header>
-        {Object.keys(canteens).map((canteen, index) => (
-          <div
-            className="canteen-card"
-            key={canteen}
-            onClick={() =>
-              this.setState({ open: this.state.open === index ? -1 : index })
-            }
-          >
-            <h3>{canteen}</h3>
-            {this.state.open === index
-              ? canteens[canteen].map((hours, index) => (
+        <div className="list">
+          {Object.keys(canteens)
+            .sort()
+            .map((canteen, index) => (
+              <div
+                className="canteen-card"
+                key={canteen}
+                onClick={() =>
+                  this.setState({
+                    open: this.state.open === index ? -1 : index
+                  })
+                }
+              >
+                <div className="canteen-header">
                   <div
-                    key={`${canteen}day${index}`}
-                    style={{ background: day === index ? '#ddd' : '#fff' }}
-                  >
-                    {hours.length ? formatHours(hours) : 'Closed'}
+                    className="canteen-status"
+                    style={{
+                      background: getOpen(canteens[canteen][day]).isOpen
+                        ? getOpen(canteens[canteen][day]).closingIn < 60
+                          ? '#dd2'
+                          : '#2d2'
+                        : '#d22'
+                    }}
+                  />
+                  <div className="canteen-title">
+                    <h3>{canteen}</h3>
                   </div>
-                ))
-              : this.renderOpen(getOpen(canteens[canteen][day]))}
-          </div>
-        ))}
+                </div>
+                {this.state.open !== index &&
+                  this.renderOpen(getOpen(canteens[canteen][day]))}
+                {this.state.open === index && (
+                  <div>
+                    {canteens[canteen].map((hours, index) => (
+                      <div
+                        style={{
+                          display: 'flex'
+                        }}
+                      >
+                        <div
+                          className="weekday"
+                          style={{
+                            fontWeight: day === index ? 'bold' : 'normal'
+                          }}
+                        >
+                          {days[index]}
+                        </div>
+                        <div
+                          key={`${canteen}day${index}`}
+                          className="hours"
+                          style={{
+                            fontWeight: day === index ? 'bold' : 'normal'
+                          }}
+                        >
+                          {hours.length ? formatHours(hours) : 'Closed'}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+        </div>
       </div>
     );
   }
