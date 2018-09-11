@@ -69,13 +69,9 @@ class App extends Component {
   }
 
   renderOpen({ isOpen, closingIn }) {
-    if (!isOpen) {
-      // return <div>Closed</div>;
-    }
-    if (closingIn < 60) {
+    if (isOpen && closingIn < 60) {
       return <div>{`Closing in ${closingIn} minutes`}</div>;
     }
-    // return <div>Open</div>;
   }
 
   render() {
