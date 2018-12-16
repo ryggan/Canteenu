@@ -6,20 +6,9 @@ import './App.css';
 import canteens from './canteens.json';
 
 const formatHours = hours =>
-  `${hours.substring(0, 2)}:${hours.substring(2, 4)}-${hours.substring(
-    5,
-    7
-  )}:${hours.substring(7, 9)}`;
+  `${hours.substring(0, 2)}:${hours.substring(2, 4)}-${hours.substring(5, 7)}:${hours.substring(7, 9)}`;
 
-const days = [
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-  'Sunday'
-];
+const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 class App extends Component {
   state = {
@@ -39,6 +28,7 @@ class App extends Component {
   getOpen(hours) {
     let isOpen;
     let closingIn = 0;
+    let opensIn = 999;
 
     if (hours.length) {
       const now = {
@@ -54,8 +44,6 @@ class App extends Component {
         minute: parseInt(hours.substring(7, 9), 10)
       };
 
-      console.log(now, opening, closing);
-
       closingIn = Math.floor(
         (moment()
           .set('hour', closing.hour)
@@ -65,15 +53,28 @@ class App extends Component {
           60
       );
 
-      isOpen = closingIn > 0;
+      opensIn = Math.floor(
+        (moment()
+          .set('hour', opening.hour)
+          .set('minute', opening.minute)
+          .unix() -
+          this.state.now) /
+          60
+      );
+
+      isOpen =
+        closingIn > 0 && (opening.hour < now.hour || (opening.hour === now.hour && opening.minute <= now.minute));
     } else {
       isOpen = false;
     }
 
-    return { isOpen, closingIn };
+    return { isOpen, opensIn, closingIn };
   }
 
-  renderOpen({ isOpen, closingIn }) {
+  renderOpen({ isOpen, opensIn, closingIn }) {
+    if (!isOpen && opensIn > 0 && opensIn < 60) {
+      return <div>{`Opens in ${opensIn} minutes`}</div>;
+    }
     if (isOpen && closingIn < 60) {
       return <div>{`Closing in ${closingIn} minutes`}</div>;
     }
@@ -96,7 +97,7 @@ class App extends Component {
             .map((canteen, index) => (
               <div
                 className="canteen-card"
-                key={canteen}
+                key={`${canteen}${index}`}
                 onClick={() =>
                   this.setState({
                     open: this.state.open === index ? -1 : index
@@ -118,12 +119,12 @@ class App extends Component {
                     <h3>{canteen}</h3>
                   </div>
                 </div>
-                {this.state.open !== index &&
-                  this.renderOpen(this.getOpen(canteens[canteen][day]))}
+                {this.state.open !== index && this.renderOpen(this.getOpen(canteens[canteen][day]))}
                 {this.state.open === index && (
                   <div>
                     {canteens[canteen].map((hours, index) => (
                       <div
+                        key={`${canteen}day${index}`}
                         style={{
                           display: 'flex'
                         }}
@@ -137,7 +138,6 @@ class App extends Component {
                           {days[index]}
                         </div>
                         <div
-                          key={`${canteen}day${index}`}
                           className="hours"
                           style={{
                             fontWeight: day === index ? 'bold' : 'normal'
