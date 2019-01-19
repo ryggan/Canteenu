@@ -39,6 +39,7 @@ class App extends Component {
     let isOpen;
     let closingIn = 0;
     let opensIn = Number.MAX_VALUE;
+
     const now = {
       hour: parseInt(moment().format('HH'), 10),
       minute: parseInt(moment().format('mm'), 10)
@@ -108,7 +109,7 @@ class App extends Component {
 
         s.isOpen =
           s.closingIn > 0 && (opening.hour < now.hour || (opening.hour === now.hour && opening.minute <= now.minute));
-        console.log(s, opening.hour, now.hour, opening.hour < now.hour);
+
         slots.push(s);
       }
 
