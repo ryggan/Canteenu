@@ -22,13 +22,13 @@ const TIME_LIMIT = 60;
 
 class App extends Component {
   state = {
-    canteens: {},
+    canteens: [],
     open: -1,
     now: moment().unix()
   };
 
   componentDidMount() {
-    this.setState({ canteens });
+    this.setState({ canteens: canteens.canteens });
 
     setInterval(() => {
       this.setState({ now: moment().unix() });
@@ -143,19 +143,24 @@ class App extends Component {
   renderCanteens() {
     const day = (moment().day() + 6) % 7;
 
-    const canteens = Object.keys(this.state.canteens)
-      .sort()
+    const canteens = this.state.canteens
+      .sort((a, b) => {
+        if(a.name < b.name) return -1;
+        if(a.name > b.name) return 1;
+        return 0;
+      })
       .map((canteen, index) => {
         return {
-          status: this.getOpen(this.state.canteens[canteen][day]).isOpen
-            ? this.getOpen(this.state.canteens[canteen][day]).closingIn < 60
+          name: canteen.name,
+          status: this.getOpen(canteen.hours[day]).isOpen
+            ? this.getOpen(canteen.hours[day]).closingIn < 60
               ? 2
               : 1
             : 3,
           component: (
             <div
               className="canteen-card"
-              key={`${canteen}${index}`}
+              key={`${canteen.name}${index}`}
               onClick={() =>
                 this.setState({
                   open: this.state.open === index ? -1 : index
@@ -166,23 +171,26 @@ class App extends Component {
                 <div
                   className="canteen-status"
                   style={{
-                    background: this.getOpen(this.state.canteens[canteen][day]).isOpen
-                      ? this.getOpen(this.state.canteens[canteen][day]).closingIn < 60
+                    background: this.getOpen(canteen.hours[day]).isOpen
+                      ? this.getOpen(canteen.hours[day]).closingIn < 60
                         ? '#dd2'
                         : '#2d2'
                       : '#d22'
                   }}
                 />
                 <div className="canteen-title">
-                  <h3>{canteen}</h3>
+                  <h3>{canteen.name}</h3>
                 </div>
               </div>
-              {this.state.open !== index && this.renderOpen(this.getOpen(this.state.canteens[canteen][day]))}
+              {this.state.open !== index && this.renderOpen(this.getOpen(canteen.hours[day]))}
               {this.state.open === index && (
                 <div>
-                  {this.state.canteens[canteen].map((hours, index) => (
+                  <div className="canteen-description">
+                    {canteen.description}
+                  </div>
+                  {canteen.hours.map((hours, index) => (
                     <div
-                      key={`${canteen}day${index}`}
+                      key={`${canteen.name}day${index}`}
                       style={{
                         display: 'flex'
                       }}
@@ -211,7 +219,12 @@ class App extends Component {
         };
       });
 
-    return canteens.sort((a, b) => a.status - b.status).map(canteen => canteen.component);
+    return canteens.sort((a, b) => {
+      if(a.status != b.status) return a.status - b.status;
+      if(a.name < b.name) return -1;
+      if(a.name > b.name) return 1;
+      return 0;
+    }).map(canteen => canteen.component);
   }
 
   render() {

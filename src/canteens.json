@@ -1,39 +1,157 @@
 {
-  "Basic Medical Sciences Canteen": ["0745-1800", "0745-1800", "0745-1800", "0745-1800", "0745-1800", "0745-1800", ""],
-  "Benjamin Franklin Coffee Corner": ["0730-1930", "0730-1930", "0730-1930", "0730-1930", "0730-1930", "0730-1930", ""],
-  "Benjamin Franklin - Canteen": ["0730-2100", "0730-2100", "0730-2100", "0730-2100", "0730-2100", "", "0830-2100"],
-  "Bobaholic - Bubble Tea": ["1200-1900", "1200-1900", "1200-1900", "1200-1900", "1200-1900", "", ""],
-  "Vegether": ["0800-2030", "0800-2030", "0800-2030", "0800-2030", "0800-2030", "0800-2030", ""],
-  "Women Cooperative Store": ["0730-1330", "0730-1330", "0730-1330", "0730-1330", "0730-1330", "0730-1330", ""],
-  "Chung Chi - Canteen": ["0730-2100", "0730-2100", "0730-2100", "0730-2100", "0730-2100", "0730-2100", "0730-2100"],
-  "Lee Shau Kee - Café": ["0800-1700", "0800-1700", "0800-1700", "0800-1700", "0800-1700", "", ""],
-  "Li Wai Chun - Café": ["0800-2000", "0800-2000", "0800-2000", "0800-2000", "0800-2000", "0800-1700", ""],
-  "Pommerenke Paper & Coffee": ["1030-2130", "1030-2130", "1030-2130", "1030-2130", "1030-2130", "1200-1800", ""],
-  "Ebeneezer's Kebabs & Pizzeria": ["1000-2000", "1000-2000", "1000-2000", "1000-2000", "1000-2000", "1000-2000", ""],
-  "New Asia - Canteen": ["0800-2100", "0800-2100", "0800-2100", "0800-2100", "0800-2100", "0800-2100", "1100-2100"],
-  "New Asia Yun Chi Hsien": ["1200-1400", "1200-1400", "1200-1400", "1200-1400", "1200-1400", "", ""],
-  "United Canteen": ["0800-2300", "0800-2300", "0800-2300", "0800-2300", "0800-2100", "1100-2100", ""],
-  "United Si Yuan Amenities": ["", "1700-2300", "1700-2300", "1700-2300", "1700-2300", "1200-1800", "1200-1800"],
-  "SeeYou@Shaw": ["0800-2100", "0800-2100", "0800-2100", "0800-2100", "0800-2100", "", "0900-2100"],
-  "Morningside Dining Hall": ["0800-1700", "0800-1700", "0800-1700", "0800-1700", "0800-1700", "", ""],
-  "Morningside Café": ["0800-2100", "0800-2100", "0800-2100", "0800-2100", "0800-2100", "1100-1900", "1100-1900"],
-  "S.H. Ho - Canteen": ["0730-2100", "0730-2100", "0730-2100", "0730-2100", "0730-2100", "0730-2100", "0730-2100"],
-  "S.H. Ho - Coffee Shop": ["0800-2100", "0800-2100", "0800-2100", "0800-2100", "0800-2100", "0800-1600", ""],
-  "C.W. Chu - Canteen": [
-    "0800-2100",
-    ["0800-1845", "1945-2100"],
-    ["0800-1845", "1945-2100"],
-    ["0800-1845", "1945-2100"],
-    "0800-2100",
-    "0900-2100",
-    ""
-  ],
-  "C.W. Chu - Coffee Shop": ["0800-2100", "0800-2100", "0800-2100", "0800-2100", "0800-2100", "0900-2100", ""],
-  "Wu Yee Sun - Canteen": ["0745-2045", "0745-2045", "0745-2045", "0745-2045", "0745-2045", "0745-2045", ""],
-  "Lee Woo Sing - Canteen": ["0730-2130", "0730-2130", "0730-2130", "0730-2130", "0730-2130", "0900-2130", "0900-2130"],
-  "Lee Woo Sing The Green": ["1100-2100", "1100-2100", "1100-2100", "1100-2100", "1100-2100", "1100-2100", "1100-2100"],
-  "Lee Woo Sing Café Tolo": ["0800-2200", "0800-2200", "0800-2200", "0800-2200", "0800-2200", "1000-2200", "1000-2200"],
-  "Cheng Yu Tung - The Stage": ["0845-1715", "0845-1715", "0845-1715", "0845-1715", "0845-1715", "", ""],
-  "Café 330": ["0800-2030", "0800-2030", "0800-2030", "0800-2030", "0800-2030", "0800-2000", ""],
-  "Grove": ["1000-1945", "1000-1945", "1000-1945", "1000-1945", "1000-1945", "1000-1945", ""]
+  "canteens": [
+    {
+      "name": "Basic Medical Sciences Canteen",
+      "hours": ["0745-1800", "0745-1800", "0745-1800", "0745-1800", "0745-1800", "0745-1800", ""],
+      "description": "Serve Chinese main courses (with rice), sandwiches, salad, coffee, tea and soft drinks."
+    },
+    {
+      "name": "Benjamin Franklin Coffee Corner",
+      "hours": ["0730-1930", "0730-1930", "0730-1930", "0730-1930", "0730-1930", "0730-1930", ""],
+      "description": "Serve salads, sandwiches, pasta, Vietnamese food, coffee, tea and soft drinks."
+    },
+    {
+      "name": "Benjamin Franklin - Canteen",
+      "hours": ["0730-2100", "0730-2100", "0730-2100", "0730-2100", "0730-2100", "", "0830-2100"],
+      "description": "Serve dim sums (in the morning), Chinese and Western main courses (with rice, noodles or pasta), sandwiches, coffee, tea and soft drinks."
+    },
+    {
+      "name": "Bobaholic - Bubble Tea",
+      "hours": ["1200-1900", "1200-1900", "1200-1900", "1200-1900", "1200-1900", "", ""],
+      "description": ""
+    },
+    {
+      "name": "Vegether",
+      "hours": ["0800-2030", "0800-2030", "0800-2030", "0800-2030", "0800-2030", "0800-2030", ""],
+      "description": "Serve Chinese Style vegetarian food."
+    },
+    {
+      "name": "Women Cooperative Store",
+      "hours": ["0730-1330", "0730-1330", "0730-1330", "0730-1330", "0730-1330", "0730-1330", ""],
+      "description": "Serve simple snacks and soft drinks."
+    },
+    {
+      "name": "Chung Chi - Canteen",
+      "hours": ["0730-2100", "0730-2100", "0730-2100", "0730-2100", "0730-2100", "0730-2100", "0730-2100"],
+      "description": "Serve dim sums (in the morning), Chinese main courses (with rice), sandwiches, salad, coffee, tea and soft drinks."
+    },
+    {
+      "name": "Lee Shau Kee - Café",
+      "hours": ["0800-1700", "0800-1700", "0800-1700", "0800-1700", "0800-1700", "", ""],
+      "description": ""
+    },
+    {
+      "name": "Li Wai Chun - Café",
+      "hours": ["0800-2000", "0800-2000", "0800-2000", "0800-2000", "0800-2000", "0800-1700", ""],
+      "description": "Serve sandwiches, paninis, baked potatoes, salad, bakery, Western set lunches, coffee, tea and soft drinks."
+    },
+    {
+      "name": "Pommerenke Paper & Coffee",
+      "hours": ["1030-2130", "1030-2130", "1030-2130", "1030-2130", "1030-2130", "1200-1800", ""],
+      "description": "Serve coffee and Japanese curry rice."
+    },
+    {
+      "name": "Ebeneezer's Kebabs & Pizzeria",
+      "hours": ["1000-2000", "1000-2000", "1000-2000", "1000-2000", "1000-2000", "1000-2000", ""],
+      "description": "Serve halal food."
+    },
+    {
+      "name": "New Asia - Canteen",
+      "hours": ["0800-2100", "0800-2100", "0800-2100", "0800-2100", "0800-2100", "0800-2100", "1100-2100"],
+      "description": "Serve Chinese main courses (with rice), Japanese noodles, sandwiches, salad, coffee, tea and soft drinks."
+    },
+    {
+      "name": "New Asia Yun Chi Hsien",
+      "hours": ["1200-1400", "1200-1400", "1200-1400", "1200-1400", "1200-1400", "", ""],
+      "description": ""
+    },
+    {
+      "name": "United Canteen",
+      "hours": ["0800-2300", "0800-2300", "0800-2300", "0800-2300", "0800-2100", "1100-2100", ""],
+      "description": "Serve Chinese main courses (with rice), noodles, sandwiches, salads, coffee, tea and soft drinks."
+    },
+    {
+      "name": "United Si Yuan Amenities",
+      "hours": ["", "1700-2300", "1700-2300", "1700-2300", "1700-2300", "1200-1800", "1200-1800"],
+      "description": ""
+    },
+    {
+      "name": "SeeYou@Shaw",
+      "hours": ["0800-2100", "0800-2100", "0800-2100", "0800-2100", "0800-2100", "", "0900-2100"],
+      "description": "Serve Chinese main courses, fried rice and noodles, Chinese tea and soft drinks."
+    },
+    {
+      "name": "Morningside Dining Hall",
+      "hours": ["0800-1700", "0800-1700", "0800-1700", "0800-1700", "0800-1700", "", ""],
+      "description": "Serve international cuisines."
+    },
+    {
+      "name": "Morningside Café",
+      "hours": ["0800-2100", "0800-2100", "0800-2100", "0800-2100", "0800-2100", "1100-1900", "1100-1900"],
+      "description": "Serve sandwiches, salad, pasta, coffee, tea and soft drinks."
+    },
+    {
+      "name": "S.H. Ho - Canteen",
+      "hours": ["0730-2100", "0730-2100", "0730-2100", "0730-2100", "0730-2100", "0730-2100", "0730-2100"],
+      "description": "Serve Chinese main courses, sandwiches, salads, coffee, tea and soft drinks."
+    },
+    {
+      "name": "S.H. Ho - Coffee Shop",
+      "hours": ["0800-2100", "0800-2100", "0800-2100", "0800-2100", "0800-2100", "0800-1600", ""],
+      "description": "Serve Chinese cuisine."
+    },
+    {
+      "name": "C.W. Chu - Canteen",
+      "hours": [
+        "0800-2100",
+        ["0800-1845", "1945-2100"],
+        ["0800-1845", "1945-2100"],
+        ["0800-1845", "1945-2100"],
+        "0800-2100",
+        "0900-2100",
+        ""
+      ],
+      "description": ""
+    },
+    {
+      "name": "C.W. Chu - Coffee Shop",
+      "hours": ["0800-2100", "0800-2100", "0800-2100", "0800-2100", "0800-2100", "0900-2100", ""],
+      "description": ""
+    },
+    {
+      "name": "Wu Yee Sun - Canteen",
+      "hours": ["0745-2045", "0745-2045", "0745-2045", "0745-2045", "0745-2045", "0745-2045", ""],
+      "description": ""
+    },
+    {
+      "name": "Lee Woo Sing - Canteen",
+      "hours": ["0730-2130", "0730-2130", "0730-2130", "0730-2130", "0730-2130", "0900-2130", "0900-2130"],
+      "description": ""
+    },
+    {
+      "name": "Lee Woo Sing The Green",
+      "hours": ["1100-2100", "1100-2100", "1100-2100", "1100-2100", "1100-2100", "1100-2100", "1100-2100"],
+      "description": "Serve salad and sandwiches."
+    },
+    {
+      "name": "Lee Woo Sing Café Tolo",
+      "hours": ["0800-2200", "0800-2200", "0800-2200", "0800-2200", "0800-2200", "1000-2200", "1000-2200"],
+      "description": "Serve premium branded coffee, sandwiches and light snacks."
+    },
+    {
+      "name": "Cheng Yu Tung - The Stage",
+      "hours": ["0845-1715", "0845-1715", "0845-1715", "0845-1715", "0845-1715", "", ""],
+      "description": ""
+    },
+    {
+      "name": "Café 330",
+      "hours": ["0800-2030", "0800-2030", "0800-2030", "0800-2030", "0800-2030", "0800-2000", ""],
+      "description": "Serve salad, sandwiches, cakes, coffee, tea, soft drinks, pasta and fried rice (lunch time)."
+    },
+    {
+      "name": "Grove",
+      "hours": ["1000-1945", "1000-1945", "1000-1945", "1000-1945", "1000-1945", "1000-1945", ""],
+      "description": ""
+    }
+  ]
 }
