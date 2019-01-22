@@ -39,6 +39,15 @@
   margin: 5px;
 }
 
+.canteen-description {
+  display: flex;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  color: dimgray;
+  text-align: left;
+  font-size: 1.1em;
+}
+
 .canteen-status {
   width: 24px;
   height: 24px;
