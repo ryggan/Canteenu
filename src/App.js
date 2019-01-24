@@ -145,8 +145,8 @@ class App extends Component {
 
     const canteens = this.state.canteens
       .sort((a, b) => {
-        if(a.name < b.name) return -1;
-        if(a.name > b.name) return 1;
+        if (a.name < b.name) return -1;
+        if (a.name > b.name) return 1;
         return 0;
       })
       .map((canteen, index) => {
@@ -185,9 +185,7 @@ class App extends Component {
               {this.state.open !== index && this.renderOpen(this.getOpen(canteen.hours[day]))}
               {this.state.open === index && (
                 <div>
-                  <div className="canteen-description">
-                    {canteen.description}
-                  </div>
+                  <div className="canteen-description">{canteen.description}</div>
                   {canteen.hours.map((hours, index) => (
                     <div
                       key={`${canteen.name}day${index}`}
@@ -219,12 +217,14 @@ class App extends Component {
         };
       });
 
-    return canteens.sort((a, b) => {
-      if(a.status != b.status) return a.status - b.status;
-      if(a.name < b.name) return -1;
-      if(a.name > b.name) return 1;
-      return 0;
-    }).map(canteen => canteen.component);
+    return canteens
+      .sort((a, b) => {
+        if (a.status !== b.status) return a.status - b.status;
+        if (a.name < b.name) return -1;
+        if (a.name > b.name) return 1;
+        return 0;
+      })
+      .map(canteen => canteen.component);
   }
 
   render() {
@@ -241,5 +241,4 @@ class App extends Component {
   }
 }
 
-// dan chet beyoo nanee
 export default App;
